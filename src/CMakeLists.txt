@@ -38,4 +38,4 @@ target_include_directories(${TARGET} PRIVATE
 
 include(compiler_linker_options)  
 include(post_build_commands)
-include(add_program_target)
+include(program_commands)

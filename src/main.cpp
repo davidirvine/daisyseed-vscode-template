@@ -19,6 +19,10 @@ int main(void)
     hardware.Configure();
     hardware.Init();
 
+    // HEADS UP! execution will stop until a serial connection to the device is made
+    hardware.StartLog(true);
+    hardware.PrintLine("DaisyVSCodeTemplate Initialized");
+    
     // Loop forever
     for(;;)
     {

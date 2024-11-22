@@ -1,4 +1,26 @@
-set(LINKER_SCRIPT ${LIBDAISY_DIR}/core/STM32H750IB_flash.lds)
+set(DAISY_PID df11)
+set(STM_PID df11)
+
+set(INTERNAL_ADDRESS 0x08000000)
+set(QSPI_ADDRESS 0x90040000)
+
+set(TARGET_BIN ${CMAKE_BINARY_DIR}/bin/${TARGET}.bin)
+set(TARGET_ELF ${CMAKE_BINARY_DIR}/bin/${TARGET}.elf)
+set(TARGET_HEX ${CMAKE_BINARY_DIR}/bin/${TARGET}.hex)
+
+#
+# Configure the linker script and other odds and ends for the
+# selected boot mode
+message(STATUS "Using ${EXECUTABLE_STORAGE_LOCATION} storage location")
+if ("x_${EXECUTABLE_STORAGE_LOCATION}" STREQUAL "x_BOOT_FLASH")
+  include(boot_flash)
+elseif ("x_${EXECUTABLE_STORAGE_LOCATION}" STREQUAL "x_BOOT_SRAM")
+  include(boot_sram)
+elseif ("x_${EXECUTABLE_STORAGE_LOCATION}" STREQUAL "x_BOOT_QSPI")
+  include(boot_qspi)
+else()
+  message(FATAL_ERROR "Invalid EXECUTABLE_STORAGE_LOCATION: ${EXECUTABLE_STORAGE_LOCATION}")
+endif()
 
 
 set_target_properties(${TARGET} PROPERTIES
@@ -22,16 +44,10 @@ target_link_options(${TARGET} PUBLIC
   LINKER:--unresolved-symbols=report-all
   LINKER:--warn-common
   $<$<CXX_COMPILER_ID:GNU>:LINKER:--warn-section-align>
-  # Currently a GSoC project to port this to LLD
   $<$<CXX_COMPILER_ID:GNU>:LINKER:--print-memory-usage>
 )
 
-target_compile_options(${TARGET} PUBLIC
-  $<$<CONFIG:Debug>:-Og>
-  $<$<CONFIG:Release>:-O3>
-  $<$<CONFIG:MinSizeRel>:-Os>
-  $<$<CONFIG:Release,MinSizeRel,RelWithDebInfo>:-flto>
-  $<$<CONFIG:Debug,RelWithDebInfo>:-ggdb3>
+set(c_flags   
   -Wall
   -Wno-attributes
   -Wno-strict-aliasing
@@ -40,12 +56,32 @@ target_compile_options(${TARGET} PUBLIC
   -Wno-stringop-overflow
   -Wno-error=reorder
   -Wno-error=sign-compare
-  -fexceptions
   -DQ_DONT_USE_THREADS=1
-  $<$<COMPILE_LANGUAGE:CXX>:-Wno-register>
-  # At same point this generator should be removed, but the clang build isn't there yet
-  $<$<CXX_COMPILER_ID:GNU>:-Werror>
-  # These are explicitly for startup_stm32h750xx.c
-  $<$<CXX_COMPILER_ID:GNU>:-Wno-attributes>
-  $<$<CXX_COMPILER_ID:GNU>:-Wno-missing-attributes>
+)
+
+
+set(cxx_flags
+  -fno-exceptions
+  -fasm
+  -finline
+  -finline-functions-called-once
+  -fshort-enums
+  -fno-move-loop-invariants
+  -fno-unwind-tables
+  -fno-rtti
+  -fasm
+  -Wno-register
+)
+
+set(gnu_cxx_flags -Werror -Wno-attributes -Wno-missing-attributes)
+
+target_compile_options(${TARGET} PUBLIC
+  $<$<CONFIG:Debug>:-Og>
+  $<$<CONFIG:Release>:-O3>
+  $<$<CONFIG:MinSizeRel>:-Os>
+  $<$<CONFIG:Release,MinSizeRel,RelWithDebInfo>:-flto>
+  $<$<CONFIG:Debug,RelWithDebInfo>:-ggdb3>
+  $<$<COMPILE_LANGUAGE:C>:${c_flags}>
+  $<$<COMPILE_LANGUAGE:CXX>:${cxx_flags}>
+  $<$<CXX_COMPILER_ID:GNU>:${gnu_cxx_flags}>
 )
