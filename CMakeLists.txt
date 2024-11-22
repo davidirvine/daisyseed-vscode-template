@@ -24,7 +24,7 @@ project(DaisyVSCodeTemplate VERSION 0.1.0 LANGUAGES CXX)
 #
 # See: add_program_commands.cmake
 #
-set(EXECUTABLE_STORAGE_LOCATION BOOT_SRAM)
+set(EXECUTABLE_STORAGE_LOCATION BOOT_FLASH)
 
 add_subdirectory(${LIBDAISY_DIR})
 add_subdirectory(${DAISYSP_DIR})

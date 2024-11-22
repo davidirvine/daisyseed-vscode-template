@@ -1,7 +1,7 @@
 {
   "configurations": [
     {
-      "name": "Debug",
+      "name": "On Device Debug",
       "configFiles": [
           "interface/stlink.cfg",
           "target/stm32h7x.cfg"
@@ -12,8 +12,7 @@
           "${workspaceRoot}/src"
       ],
       // Here's where you can put the path to the program you want to debug:
-      //"executable": "${workspaceRoot}/examples/SDMMC_HelloWorld/build/SDMMC_HelloWorld.elf",
-      "executable": "${workspaceRoot}/build/bin/blink.elf",
+      "executable": "${workspaceRoot}/build/bin/daisyvscodetemplate.elf",
       "interface": "swd",
       "openOCDLaunchCommands": [
           "init",
@@ -35,3 +34,4 @@
   ],
   "version": "0.2.0"
 }
+

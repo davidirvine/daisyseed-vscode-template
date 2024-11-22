@@ -19,7 +19,7 @@ int main(void)
     hardware.Configure();
     hardware.Init();
 
-    // HEADS UP! execution will stop until a serial connection to the device is made
+    // HEADS UP! StartLog will block until a serial terminal is connected
     hardware.StartLog(true);
     hardware.PrintLine("DaisyVSCodeTemplate Initialized");
     

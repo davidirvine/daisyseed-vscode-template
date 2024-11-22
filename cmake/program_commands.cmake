@@ -15,11 +15,13 @@ set(DFU_PROGRAM ${DFU} -a 0 -s ${FLASH_ADDRESS}:leave -D ${TARGET_BIN} -d ,0483:
 add_custom_target(program-dfu COMMAND ${DFU_PROGRAM})
 
 
-# program-ocd
-# program the target via JTAG probe using openocd
-set(CHIPSET stm32h7x)
-set(OCD_DIR /usr/local/share/openocd/scripts)
-set(PGM_DEVICE interface/stlink.cfg)
-set(OCDFLAGS -f ${PGM_DEVICE} -f target/${CHIPSET}.cfg)
-set(OCD_PROGRAM ${OCD} -s ${OCD_DIR} ${OCDFLAGS} -c "program ${TARGET_ELF} verify reset exit")
-add_custom_target(program-ocd COMMAND ${OCD_PROGRAM})
+if ("x_${EXECUTABLE_STORAGE_LOCATION}" STREQUAL "x_BOOT_FLASH")
+    # program-ocd
+    # program the target via JTAG probe using openocd
+    set(CHIPSET stm32h7x)
+    set(OCD_DIR /usr/local/share/openocd/scripts)
+    set(PGM_DEVICE interface/stlink.cfg)
+    set(OCDFLAGS -f ${PGM_DEVICE} -f target/${CHIPSET}.cfg)
+    set(OCD_PROGRAM ${OCD} -s ${OCD_DIR} ${OCDFLAGS} -c "program ${TARGET_ELF} verify reset exit")
+    add_custom_target(program-ocd COMMAND ${OCD_PROGRAM})
+endif()
