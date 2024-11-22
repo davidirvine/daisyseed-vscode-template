@@ -1,6 +1,6 @@
-# Crosscompile
+# DaisyVSCodeTemplate
 
-This project serves as a template for Daisy Seed development using VSCode. 
+This project serves as a template VSCode project for developing for Daisy Seed. 
 
 ## Submodules
 
