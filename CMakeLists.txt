@@ -4,6 +4,8 @@ cmake_policy(SET CMP0048 NEW)
 cmake_policy(SET CMP0135 NEW)
 cmake_policy(SET CMP0152 NEW)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 include (${CMAKE_CURRENT_LIST_DIR}/cmake/toolchains/autodetect.cmake)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
@@ -26,7 +28,5 @@ project(DaisyVSCodeTemplate VERSION 0.1.0 LANGUAGES CXX)
 #
 set(EXECUTABLE_STORAGE_LOCATION BOOT_FLASH)
 
-add_subdirectory(${LIBDAISY_DIR})
-add_subdirectory(${DAISYSP_DIR})
-add_subdirectory(src bin)
-
+include(add_external_projects)
+add_subdirectory(src)

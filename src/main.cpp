@@ -1,15 +1,9 @@
 #include "daisy_seed.h"
 
-// Use the daisy namespace to prevent having to type
-// daisy:: before all libdaisy functions
-using namespace daisy;
-
-// Declare a DaisySeed object called hardware
-DaisySeed hardware;
+daisy::DaisySeed hardware;
 
 int main(void)
 {
-    // Declare a variable to store the state we want to set for the LED.
     bool led_state;
     led_state = true;
 
@@ -33,6 +27,11 @@ int main(void)
         led_state = !led_state;
 
         // Wait 500ms
-        System::Delay(500);
-    }
+        daisy::System::Delay(500);
+    } 
 }
+
+/*`
+    TODO:
+    - add https://github.com/doctest/doctest/ 
+*/

@@ -7,18 +7,11 @@ add_executable(${TARGET}
     main.cpp 
 )
 
-# Include the binary directory for the generated dependency files
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 # Link libraries
-# Seems odd that we need to specify the libs that libDaisy is dependent on
-target_link_libraries(${TARGET} ${CMAKE_BINARY_DIR}/libDaisy/libdaisy.a)
-target_link_libraries(${TARGET} ${CMAKE_BINARY_DIR}/DaisySP/libdaisysp.a)
-target_link_libraries(${TARGET} ${CMAKE_BINARY_DIR}/libDaisy/Drivers/libSTM32H7XX_HAL_DRIVER.a)
-target_link_libraries(${TARGET} ${CMAKE_BINARY_DIR}/libDaisy/Drivers/libCMSIS_DEVICE_H7.a)
-target_link_libraries(${TARGET} ${CMAKE_BINARY_DIR}/libDaisy/Middlewares/ST/libSTM32_USB_DEVICE_LIBRARY.a)
-target_link_libraries(${TARGET} ${CMAKE_BINARY_DIR}/libDaisy/Middlewares/ST/libSTM32_USB_HOST_LIBRARY.a)
-target_link_libraries(${TARGET} ${CMAKE_BINARY_DIR}/libDaisy/Middlewares/Third_Party/FatFs/libFatFs.a)
+target_link_libraries(${TARGET} ${DAISYSP_DIR}/build/libdaisysp.a)
+target_link_libraries(${TARGET} ${LIBDAISY_DIR}/build/libdaisy.a)
+
 
 # Include directories
 target_include_directories(${TARGET} PRIVATE
