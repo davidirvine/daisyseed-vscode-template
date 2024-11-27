@@ -7,11 +7,9 @@ add_executable(${TARGET}
     main.cpp 
 )
 
-
 # Link libraries
 target_link_libraries(${TARGET} ${DAISYSP_DIR}/build/libdaisysp.a)
 target_link_libraries(${TARGET} ${LIBDAISY_DIR}/build/libdaisy.a)
-
 
 # Include directories
 target_include_directories(${TARGET} PRIVATE
