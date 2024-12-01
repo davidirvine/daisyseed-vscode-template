@@ -4,9 +4,9 @@ set(STM_PID df11)
 set(INTERNAL_ADDRESS 0x08000000)
 set(QSPI_ADDRESS 0x90040000)
 
-set(TARGET_BIN ${CMAKE_BINARY_DIR}/bin/${TARGET}.bin)
-set(TARGET_ELF ${CMAKE_BINARY_DIR}/bin/${TARGET}.elf)
-set(TARGET_HEX ${CMAKE_BINARY_DIR}/bin/${TARGET}.hex)
+set(TARGET_BIN ${CMAKE_BINARY_DIR}/src/${TARGET}.bin)
+set(TARGET_ELF ${CMAKE_BINARY_DIR}/src/${TARGET}.elf)
+set(TARGET_HEX ${CMAKE_BINARY_DIR}/src/${TARGET}.hex)
 
 #
 # Configure the linker script and other odds and ends for the
