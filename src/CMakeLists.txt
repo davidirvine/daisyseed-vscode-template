@@ -3,15 +3,14 @@
 #
 set(TARGET daisyvscodetemplate)
 
-set(SOURCE_FILES
+set(SOURCES
     main.cpp
-    message.cpp
 )
 
-add_executable(${TARGET} ${SOURCE_FILES})
+add_executable(${TARGET} ${SOURCES})
 
 # Source file specific compiler options
-foreach(SRC_FILE ${SOURCE_FILES})
+foreach(SRC_FILE ${SOURCES})
     get_filename_component(src_basename ${SRC_FILE} NAME_WLE)
     set_source_files_properties(${SRC_FILE} PROPERTIES 
         COMPILE_FLAGS "-Wa,-a,-ad,-alms=${CMAKE_CURRENT_BINARY_DIR}/${src_basename}.lst"
