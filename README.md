@@ -1,10 +1,16 @@
 # DaisyVSCodeTemplate
 
-This project serves as a template VSCode project for developing for Daisy Seed. 
+This is a template repo for DaisySeed development using VSCode. To create a private repo using this repo as a template:
 
-## Submodules
+```
+gh repo create {new_repo_name} --private --clone --template davidirvine/DaisyVSCodeTemplate
+```
 
-This repo uses Git submodules so when cloning you'll probably want to use the `--recurse-submodules` option. If you forgot or want to update the submodules recursively use `git submodule update --init --recursive`.
+## Thirdparty Dependencies
+
+External dependencies like `libDaisy` and `DaisySP` are managed using CMake `external_project` and will be downloaded and built as part of the build process. 
+
+These repos are cloned into the `thirdparty` directory. `doctest` has been copied along with it's license to `thirdparty/doctest`.
 
 
 ## Build Setup
