@@ -3,9 +3,20 @@
 #
 set(TARGET daisyvscodetemplate)
 
-add_executable(${TARGET} 
-    main.cpp 
+set(SOURCE_FILES
+    main.cpp
+    message.cpp
 )
+
+add_executable(${TARGET} ${SOURCE_FILES})
+
+# Source file specific compiler options
+foreach(SRC_FILE ${SOURCE_FILES})
+    get_filename_component(src_basename ${SRC_FILE} NAME_WLE)
+    set_source_files_properties(${SRC_FILE} PROPERTIES 
+        COMPILE_FLAGS "-Wa,-a,-ad,-alms=${CMAKE_CURRENT_BINARY_DIR}/${src_basename}.lst"
+    )
+endforeach()
 
 # Link libraries
 target_link_libraries(${TARGET} ${DAISYSP_DIR}/build/libdaisysp.a)
