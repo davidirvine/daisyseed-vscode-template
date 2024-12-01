@@ -10,8 +10,8 @@ include (${CMAKE_CURRENT_LIST_DIR}/cmake/toolchains/autodetect.cmake)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
 # Library Locations
-set(LIBDAISY_DIR ${CMAKE_SOURCE_DIR}/libDaisy)
-set(DAISYSP_DIR ${CMAKE_SOURCE_DIR}/DaisySP)
+set(LIBDAISY_DIR ${CMAKE_SOURCE_DIR}/thirdparty/libDaisy)
+set(DAISYSP_DIR ${CMAKE_SOURCE_DIR}/thirdparty/DaisySP)
 
 project(DaisyVSCodeTemplate VERSION 0.1.0 LANGUAGES CXX)
 
