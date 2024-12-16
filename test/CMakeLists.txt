@@ -23,5 +23,7 @@ set_target_properties(tests PROPERTIES
   RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
 )
 
+target_compile_options(tests PRIVATE -g)
+
 add_test(NAME tests COMMAND tests)
 enable_testing()
