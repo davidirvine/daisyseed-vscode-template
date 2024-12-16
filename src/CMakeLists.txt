@@ -1,6 +1,3 @@
-#
-#   some of the included cmake files depend on TARGET being defined
-#
 set(TARGET daisyvscodetemplate)
 
 set(SOURCES
@@ -18,12 +15,16 @@ foreach(SRC_FILE ${SOURCES})
 endforeach()
 
 # Link libraries
-target_link_libraries(${TARGET} ${DAISYSP_DIR}/build/libdaisysp.a)
-target_link_libraries(${TARGET} ${LIBDAISY_DIR}/build/libdaisy.a)
+target_link_libraries(${TARGET} PRIVATE
+    ${DAISYSP_DIR}/build/libdaisysp.a
+    ${LIBDAISY_DIR}/build/libdaisy.a
+    #${DAISYSP_DIR}/DaisySP-LGPL/build/libdaisysp-lgpl.a
+)
 
 # Include directories
 target_include_directories(${TARGET} PRIVATE
     ${DAISYSP_DIR}/Source
+    #${DAISYSP_DIR}/DaisySP-LGPL/Source
     ${LIBDAISY_DIR}/src/
     ${LIBDAISY_DIR}/src/sys
     ${LIBDAISY_DIR}/src/usbh
