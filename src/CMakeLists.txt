@@ -1,17 +1,13 @@
-#
-#   some of the included cmake files depend on TARGET being defined
-#
 set(TARGET daisyvscodetemplate)
 
-set(SOURCE_FILES
+set(SOURCES
     main.cpp
-    message.cpp
 )
 
-add_executable(${TARGET} ${SOURCE_FILES})
+add_executable(${TARGET} ${SOURCES})
 
 # Source file specific compiler options
-foreach(SRC_FILE ${SOURCE_FILES})
+foreach(SRC_FILE ${SOURCES})
     get_filename_component(src_basename ${SRC_FILE} NAME_WLE)
     set_source_files_properties(${SRC_FILE} PROPERTIES 
         COMPILE_FLAGS "-Wa,-a,-ad,-alms=${CMAKE_CURRENT_BINARY_DIR}/${src_basename}.lst"
@@ -19,12 +15,16 @@ foreach(SRC_FILE ${SOURCE_FILES})
 endforeach()
 
 # Link libraries
-target_link_libraries(${TARGET} ${DAISYSP_DIR}/build/libdaisysp.a)
-target_link_libraries(${TARGET} ${LIBDAISY_DIR}/build/libdaisy.a)
+target_link_libraries(${TARGET} PRIVATE
+    ${DAISYSP_DIR}/build/libdaisysp.a
+    ${LIBDAISY_DIR}/build/libdaisy.a
+    #${DAISYSP_DIR}/DaisySP-LGPL/build/libdaisysp-lgpl.a
+)
 
 # Include directories
 target_include_directories(${TARGET} PRIVATE
     ${DAISYSP_DIR}/Source
+    #${DAISYSP_DIR}/DaisySP-LGPL/Source
     ${LIBDAISY_DIR}/src/
     ${LIBDAISY_DIR}/src/sys
     ${LIBDAISY_DIR}/src/usbh

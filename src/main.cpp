@@ -30,8 +30,3 @@ int main(void)
         daisy::System::Delay(500);
     } 
 }
-
-/*`
-    TODO:
-    - add https://github.com/doctest/doctest/ 
-*/
