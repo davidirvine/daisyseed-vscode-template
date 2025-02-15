@@ -28,5 +28,5 @@ project(DaisyVSCodeTemplate VERSION 0.1.0 LANGUAGES CXX)
 #
 set(EXECUTABLE_STORAGE_LOCATION BOOT_FLASH)
 
-include(add_external_projects)
+include(add_thirdparty_dependencies)
 add_subdirectory(src)
