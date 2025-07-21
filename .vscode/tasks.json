@@ -1,0 +1,262 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Configure Build (Debug)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-DCMAKE_BUILD_TYPE=Debug",
+                ".."
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Configure CMake build with Debug flags"
+        },
+        {
+            "label": "Configure Build (Release)",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-DCMAKE_BUILD_TYPE=Release",
+                ".."
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Configure CMake build with Release flags"
+        },
+        {
+            "label": "Build Debug",
+            "type": "shell",
+            "command": "make",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "dependsOn": "Setup Build Directory",
+            "detail": "Build the project using make"
+        },
+        {
+            "label": "Clean Build",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Remove build directory"
+        },
+        {
+            "label": "Setup Build Directory",
+            "type": "shell",
+            "command": "mkdir",
+            "args": [
+                "-p",
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Create build directory if it doesn't exist"
+        },
+        {
+            "label": "Program Device (DFU)",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "program-dfu"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "dependsOn": "Build Debug",
+            "detail": "Program the device using DFU"
+        },
+        {
+            "label": "Program Device (OpenOCD)",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "program-ocd"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/build"
+            },
+            "group": "build",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "dependsOn": "Build Debug",
+            "detail": "Program the device using OpenOCD"
+        },
+        {
+            "label": "Configure Unit Tests",
+            "type": "shell",
+            "command": "cmake",
+            "args": [
+                "-DCMAKE_BUILD_TYPE=Debug",
+                ".."
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/test/build"
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "dependsOn": "Setup Test Build Directory",
+            "detail": "Configure unit test build"
+        },
+        {
+            "label": "Build Unit Tests",
+            "type": "shell",
+            "command": "make",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}/test/build"
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "dependsOn": "Configure Unit Tests",
+            "detail": "Build unit tests"
+        },
+        {
+            "label": "Run Unit Tests",
+            "type": "shell",
+            "command": "./bin/tests",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}/test/build"
+            },
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "dependsOn": "Build Unit Tests",
+            "detail": "Run unit tests"
+        },
+        {
+            "label": "Setup Test Build Directory",
+            "type": "shell",
+            "command": "mkdir",
+            "args": [
+                "-p",
+                "test/build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Create test build directory if it doesn't exist"
+        },
+        {
+            "label": "Clean Test Build",
+            "type": "shell",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "test/build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "test",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": [],
+            "detail": "Remove test build directory"
+        }
+    ]
+}
