@@ -3,3 +3,4 @@ build
 test/build
 thirdparty/libDaisy
 thirdparty/DaisySP
+.template-backup-*
