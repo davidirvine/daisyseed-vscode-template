@@ -25,12 +25,34 @@ To create a private repo using this repo as a template:
 gh repo create {new_repo_name} --private --clone --template davidirvine/daisyseed-vscode-template
 ```
 
-## Values You'll Want to Change
+## Quick Setup
 
-When creating a new project from this template you'll need to change the following values:
+After creating your project from this template, use the setup script to customize it for your project:
+
+```bash
+# Interactive setup (recommended for first-time users)
+./scripts/setup-project.sh
+
+# Non-interactive setup
+./scripts/setup-project.sh --name "MyAudioProject" --target myaudioproject
+```
+
+The setup script will:
+- Update project names throughout all files
+- Configure CMake targets appropriately  
+- Update VSCode debug configurations
+- Create a project-specific README
+- Backup original template files
+
+## Manual Setup (Alternative)
+
+If you prefer to set up manually, you'll need to change the following values:
 
 - `CMakeLists.txt:16` project name
 - `src/CMakeLists.txt:4` TARGET value
+- `src/main.cpp` initialization message
+- `.vscode/launch.json` executable path
+- Update README.md title and description
 
 ## Build Setup
 ```
@@ -94,5 +116,21 @@ Two launch configurations are provided for source level debugging.
 External dependencies like `libDaisy` and `DaisySP` can either be managed through `git submodule` or are managed using CMake `external_project` depending on your needs. If you are going to use `external_project` add your dependencies to `cmake/add_thirdparty_dependencies.cmake`.
 
 Regardless of which method you use the `thirdparty` directory is the intended location for external dependencies. `doctest` has been copied along with it's license to `thirdparty/doctest`.
+
+## Project Structure
+
+```
+├── .vscode/              # VSCode configuration files
+│   ├── c_cpp_properties.json
+│   ├── launch.json       # Debug configurations
+│   └── tasks.json        # Build and development tasks
+├── cmake/                # CMake modules and toolchain files
+├── scripts/              # Project setup and utility scripts
+│   └── setup-project.sh  # Template initialization script
+├── src/                  # Main source code
+├── test/                 # Unit tests
+├── thirdparty/           # External dependencies
+└── CMakeLists.txt        # Main CMake configuration
+```
 
 
