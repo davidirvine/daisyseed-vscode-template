@@ -1,7 +1,7 @@
 {
     "env": {
-        "DAISYSP_DIR": "${workspaceFolder}/daisysp",
-        "LIBDAISY_DIR": "${workspaceFolder}/libdaisy"
+        "DAISYSP_DIR": "${workspaceFolder}/thirdparty/DaisySP",
+        "LIBDAISY_DIR": "${workspaceFolder}/thirdparty/libDaisy"
     },
     "configurations": [
         {

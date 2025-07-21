@@ -22,12 +22,12 @@ My [deepnote-seed](https://github.com/davidirvine/deepnote-seed) project is an e
 To create a private repo using this repo as a template:
 
 ```
-gh repo create {new_repo_name} --private --clone --template davidirvine/DaisyVSCodeTemplate
+gh repo create {new_repo_name} --private --clone --template davidirvine/daisyseed-vscode-template
 ```
 
 ## Values You'll Want to Change
 
-When creating a nekw project from this template you'll need to change the following values:
+When creating a new project from this template you'll need to change the following values:
 
 - `CMakeLists.txt:16` project name
 - `src/CMakeLists.txt:4` TARGET value
@@ -67,7 +67,7 @@ make program-ocd
 ```
 
 ## Unit Tests
-The `test` directory is there to support compiling and running unit tests on the host platdform using [DocTest](https://github.com/doctest/doctest). Of course you can only test code that has no dependencies on hardware. A version of DocTest can be found in the `thirdparty` directory.
+The `test` directory is there to support compiling and running unit tests on the host platform using [DocTest](https://github.com/doctest/doctest). Of course you can only test code that has no dependencies on hardware. A version of DocTest can be found in the `thirdparty` directory.
 
 After you add your test sources and dependencies to `test/CMakeLists.txt` you'll want to set up you unit test build with:
 ```

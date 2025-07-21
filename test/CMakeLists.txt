@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.31)
+cmake_minimum_required(VERSION 3.10)
 project(test)
 
 
@@ -7,12 +7,12 @@ include_directories(
     ../thirdparty
 )
 
-set(TESTS_SOUCES
+set(TESTS_SOURCES
     main.cpp
 )
 
 add_executable(tests 
-  ${TESTS_SOUCES}
+  ${TESTS_SOURCES}
 )
 
 set_target_properties(tests PROPERTIES
@@ -20,7 +20,7 @@ set_target_properties(tests PROPERTIES
   CXX_STANDARD_REQUIRED YES
   C_STANDARD 11
   C_STANDARD_REQUIRED YES
-  RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}"
+  RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
 
 target_compile_options(tests PRIVATE -g)
